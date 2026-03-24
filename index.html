@@ -147,43 +147,91 @@
         <section class="card glass full-width" id="data-card">
             <div class="card-header flex-between">
                 <div>
-                    <h2><i class="fa-solid fa-database"></i> JSONPlaceholder DataViewer</h2>
+                    <h2><i class="fa-solid fa-satellite-dish"></i> API Explorer</h2>
                     <p class="subtitle">API: jsonplaceholder.typicode.com</p>
                 </div>
-                <div class="controls">
-                    <select id="data-resource" class="custom-select">
-                        <option value="posts">Posts</option>
-                        <option value="comments">Comments</option>
-                        <option value="albums">Albums</option>
-                        <option value="users">Users</option>
-                    </select>
-                    <button class="btn btn-primary" id="btn-fetch-data">
-                        <i class="fa-solid fa-cloud-arrow-down"></i> Fetch Data
+                <div class="header-actions action-buttons">
+                    <button class="icon-btn" id="btn-view-json" title="View Raw JSON Toggle" disabled>
+                        <i class="fa-solid fa-code"></i>
+                    </button>
+                    <button class="icon-btn" id="btn-copy-json" title="Copy Raw JSON" disabled>
+                        <i class="fa-regular fa-copy"></i>
                     </button>
                 </div>
             </div>
             <div class="card-body">
+                <!-- Advanced Controls -->
+                <div class="explorer-controls">
+                    <div class="resource-tabs" id="resource-tabs">
+                        <button class="tab-btn active" data-resource="posts">Posts</button>
+                        <button class="tab-btn" data-resource="comments">Comments</button>
+                        <button class="tab-btn" data-resource="albums">Albums</button>
+                        <button class="tab-btn" data-resource="photos">Photos</button>
+                        <button class="tab-btn" data-resource="todos">Todos</button>
+                        <button class="tab-btn" data-resource="users">Users</button>
+                    </div>
+                    
+                    <div class="endpoint-builder">
+                        <span class="base-url">/</span>
+                        <input type="text" id="api-query" placeholder="Enter ID or query (e.g. 1, ?postId=1, 1/comments)">
+                        <button class="btn btn-primary" id="btn-fetch-data" title="Press Enter to Fetch">
+                            <i class="fa-solid fa-bolt"></i> Fetch
+                        </button>
+                        <button class="icon-btn" id="btn-reset-data" title="Reset">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
+                        <button class="btn btn-outline" id="btn-load-sample" title="Load Sample Data">
+                            <i class="fa-solid fa-vial"></i> Sample
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
                 <div class="data-controls" style="display: none;" id="data-filters">
                     <div class="search-box">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" id="data-search" placeholder="Search records...">
                     </div>
-                    <span class="results-count" id="data-count">Showing 10 results</span>
+                    <span class="results-count" id="data-count">Showing 0 results</span>
                 </div>
                 
+                <!-- Display Area -->
                 <div class="data-grid" id="data-container">
                     <div class="empty-state">
                         <i class="fa-solid fa-table-list"></i>
                         <p>Select a resource and fetch data</p>
                     </div>
                 </div>
+
                 <div class="skeleton-loader data-skeleton" id="data-loader" style="display: none;">
                     <br>
                     <div class="skeleton-line w-100"></div><div class="skeleton-line w-80"></div>
+                    <div class="skeleton-line w-100"></div><div class="skeleton-line w-80"></div>
+                </div>
+                
+                <div class="pagination-footer" id="pagination-footer" style="display: none; text-align: center; margin-top: 1.5rem;">
+                    <button class="btn btn-outline" id="btn-load-more">
+                        <i class="fa-solid fa-angle-down"></i> Load More
+                    </button>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- API Explorer Modal -->
+    <div class="modal-backdrop" id="explorer-modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3 id="modal-title">Related Data</h3>
+                <button class="icon-btn" id="btn-close-modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Content injected here -->
+            </div>
+        </div>
+    </div>
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="toast-container"></div>
