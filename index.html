@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public API Playground</title>
+    <meta name="description" content="A premium, modern, production-ready Public API Playground web application.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo"><i class="fa-solid fa-code"></i> API Playground</h1>
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Dog Finder Card -->
+        <section class="card glass" id="dog-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-dog"></i> Dog Finder</h2>
+                <p class="subtitle">API: dog.ceo</p>
+            </div>
+            <div class="card-body">
+                <div class="image-container" id="dog-image-container">
+                    <div class="skeleton-loader skeleton-image" id="dog-loader" style="display: none;"></div>
+                    <img id="dog-image" src="" alt="Random Dog" style="display: none;">
+                    <div class="empty-state" id="dog-empty">
+                        <i class="fa-solid fa-image"></i>
+                        <p>No dog loaded yet</p>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <span class="label">Breed:</span>
+                    <span class="value" id="dog-breed">-</span>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" id="btn-get-dog">
+                    <i class="fa-solid fa-paw"></i> Get Dog
+                </button>
+                <div class="action-buttons">
+                    <button class="icon-btn" id="btn-copy-dog-url" title="Copy Image URL" disabled>
+                        <i class="fa-solid fa-link"></i>
+                    </button>
+                    <button class="icon-btn" id="btn-download-dog" title="Download Image" disabled>
+                        <i class="fa-solid fa-download"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Joke Generator Card -->
+        <section class="card glass" id="joke-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-face-laugh-squint"></i> Joke Generator</h2>
+                <p class="subtitle">API: official-joke-api</p>
+            </div>
+            <div class="card-body joke-body">
+                <div class="empty-state" id="joke-empty">
+                    <i class="fa-solid fa-masks-theater"></i>
+                    <p>Ready for a laugh?</p>
+                </div>
+                <div id="joke-content" style="display: none;">
+                    <p class="joke-setup" id="joke-setup"></p>
+                    <p class="joke-punchline" id="joke-punchline"></p>
+                </div>
+                <div class="skeleton-loader skeleton-text" id="joke-loader" style="display: none;"></div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" id="btn-get-joke">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Get Joke
+                </button>
+                <button class="icon-btn" id="btn-copy-joke" title="Copy Joke" disabled>
+                    <i class="fa-solid fa-copy"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Random User Profile Card -->
+        <section class="card glass" id="user-card">
+            <div class="card-header">
+                <h2><i class="fa-solid fa-user-astronaut"></i> Random User</h2>
+                <p class="subtitle">API: randomuser.me</p>
+            </div>
+            <div class="card-body user-body">
+                <div class="empty-state" id="user-empty">
+                    <i class="fa-solid fa-users"></i>
+                    <p>Generate a random identity</p>
+                </div>
+                
+                <div class="skeleton-loader skeleton-user" id="user-loader" style="display: none;">
+                    <div class="skeleton-avatar"></div>
+                    <div class="skeleton-lines">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                    </div>
+                </div>
+
+                <div class="profile-content" id="user-content" style="display: none;">
+                    <div class="profile-header">
+                        <img id="user-image" src="" alt="User Profile">
+                        <div class="profile-title">
+                            <h3 id="user-name">First Last</h3>
+                            <p id="user-country"><i class="fa-solid fa-location-dot"></i> Country</p>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span id="user-email">email@example.com</span>
+                            <button class="copy-small-btn" id="btn-copy-email" title="Copy Email">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <span id="user-phone">000-000-0000</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-cake-candles"></i>
+                            <span id="user-age">Age: 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" id="btn-get-user">
+                    <i class="fa-solid fa-id-badge"></i> Get User
+                </button>
+            </div>
+        </section>
+
+        <!-- JSONPlaceholder Data Viewer -->
+        <section class="card glass full-width" id="data-card">
+            <div class="card-header flex-between">
+                <div>
+                    <h2><i class="fa-solid fa-database"></i> JSONPlaceholder DataViewer</h2>
+                    <p class="subtitle">API: jsonplaceholder.typicode.com</p>
+                </div>
+                <div class="controls">
+                    <select id="data-resource" class="custom-select">
+                        <option value="posts">Posts</option>
+                        <option value="comments">Comments</option>
+                        <option value="albums">Albums</option>
+                        <option value="users">Users</option>
+                    </select>
+                    <button class="btn btn-primary" id="btn-fetch-data">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Fetch Data
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="data-controls" style="display: none;" id="data-filters">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="data-search" placeholder="Search records...">
+                    </div>
+                    <span class="results-count" id="data-count">Showing 10 results</span>
+                </div>
+                
+                <div class="data-grid" id="data-container">
+                    <div class="empty-state">
+                        <i class="fa-solid fa-table-list"></i>
+                        <p>Select a resource and fetch data</p>
+                    </div>
+                </div>
+                <div class="skeleton-loader data-skeleton" id="data-loader" style="display: none;">
+                    <br>
+                    <div class="skeleton-line w-100"></div><div class="skeleton-line w-80"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
